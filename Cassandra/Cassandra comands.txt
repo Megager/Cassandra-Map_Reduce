@@ -1,0 +1,21 @@
+﻿CREATE KEYSPACE cycling
+  WITH REPLICATION = { 
+   'class' : 'SimpleStrategy', 
+   'replication_factor' : 1 
+  };
+
+create table orders (Region text,Country text,Item_Type text,Sales_Channel text,Order_Priority text,Order_Date text,Order_ID text primary key,Ship_Date text,Units_Sold int,Unit_Price double,Unit_Cost double,Total_Revenue double,Total_Cost double,Total_Profit double);
+
+COPY cycling.orders(Region,Country,Item_Type,Sales_Channel,Order_Priority,Order_Date,Order_ID,Ship_Date,Units_Sold,Unit_Price,Unit_Cost,Total_Revenue,Total_Cost,Total_Profit) FROM 'sales.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
+create table employes(ID text, Name_Prefix text,First_Name text,Middle_Initial text,Last_Name text,Gender text,Mail text,Father_Name text,Mother_Name text,Mother_Maiden_Name text,Date_of_Birth text,Time_of_Birth text,Age double,Kgs double,Date_of_Joining text,Quarter_of_Joining text,Half_of_Joining text,Year_of_Joining int,Month_of_Joining int,Month_Name_of_Joining text,Short_Month text,Day_of_Joining double,DOW_of_Joining text,Short_DOW text,Age_in_Company double,Salary double,Last_Hike text,SSN text,Phone text,Place_Name text,Country text,City text primary key,State text,Zip text,Region text,User_Name text,Password textб primary key(city, id);
+
+COPY cycling.employes(ID,Name_Prefix,First_Name,Middle_Initial,Last_Name,Gender,Mail,Father_Name,Mother_Name ,Mother_Maiden_Name,Date_of_Birth,Time_of_Birth,Age,Kgs,Date_of_Joining,Quarter_of_Joining,Half_of_Joining,Year_of_Joining,Month_of_Joining,Month_Name_of_Joining,Short_Month,Day_of_Joining,DOW_of_Joining,Short_DOW,Age_in_Company,Salary,Last_Hike,SSN,Phone,Place_Name,Country,City,State,Zip,Region,User_Name,Password) FROM 'employes.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
+Здравствуйте.
+Перешлите это задание остальным из группы.
+1. Взять csv файл, содержащий более 100.000 записей
+2.  Загрузить данные из csv файла в БД Cassandra в том виде, в котором они есть.
+3. Реализовать 3 запроса к данным и вывести информацию. Можно через интерфейс СУБД. Можно реализовать приложение для вывода данных (на более высший бал). Уметь выполнять другие запросы к этим данным, т.е. я могу попросить реализовать мне какой-то запрос на вывод определенной информации, а вы должны уметь это сделать.
+4. Реализовать на любом языке алгоритм MapReduce и загрузить данные из csv файла в БД Cassandra (уже другая будет). Определить так алгоритм, чтобы данные можно было сжать и агрегировать. Например у вас данные о продаже бытовой техники, которые содержат название техники, бренд, регион, количество и сумма. Вы отображаете (Map function) например по региону, а потом агрегируете (Reduce function) по сумме продаж. ИЛИ отображаете по бренду, и агрегируете по количеству единиц.
+5. Написать 2 запроса на вывод информации. 1-й выводит все содержимое после агрегации, второй выводит данные по какому-то ключу (например сначала выводим данные для всех регионов, а потом я выбираю регион и выводятся данные только для этого региона)
